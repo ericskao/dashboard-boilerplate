@@ -1,7 +1,8 @@
 import type { User } from '@/app/lib/definitions';
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import { sql } from '@vercel/postgres';
 import NextAuth from 'next-auth';
-import { authConfig } from './auth.config';
+import prisma from './app/lib/prisma';
 
 async function getUser(email: string): Promise<User | undefined> {
   try {
@@ -14,7 +15,7 @@ async function getUser(email: string): Promise<User | undefined> {
 }
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  ...authConfig,
+  adapter: PrismaAdapter(prisma),
   providers: [
     // Credentials({
     //   async authorize(credentials) {

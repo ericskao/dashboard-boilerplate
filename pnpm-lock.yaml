@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@auth/prisma-adapter':
-        specifier: ^2.4.1
-        version: 2.4.1(@prisma/client@5.12.1(prisma@5.16.2))
+        specifier: ^1.6.0
+        version: 1.6.0(@prisma/client@5.16.2(prisma@5.16.2))
       '@heroicons/react':
         specifier: ^2.1.4
         version: 2.1.4(react@19.0.0-rc-f38c22b244-20240704)
@@ -18,11 +18,11 @@ importers:
         specifier: ^0.9.4
         version: 0.9.4
       '@prisma/adapter-neon':
-        specifier: ^5.16.2
-        version: 5.16.2(@neondatabase/serverless@0.9.4)
-      '@prisma/client':
         specifier: ^5.12.1
-        version: 5.12.1(prisma@5.16.2)
+        version: 5.12.1(@neondatabase/serverless@0.9.4)
+      '@prisma/client':
+        specifier: ^5.16.2
+        version: 5.16.2(prisma@5.16.2)
       '@tailwindcss/forms':
         specifier: ^0.5.7
         version: 0.5.7(tailwindcss@3.4.4)
@@ -94,6 +94,20 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
+  '@auth/core@0.29.0':
+    resolution: {integrity: sha512-MdfEjU6WRjUnPG1+XeBWrTIlAsLZU6V0imCIqVDDDPxLI6UZWldXVqAA2EsDazGofV78jqiCLHaN85mJITDqdg==}
+    peerDependencies:
+      '@simplewebauthn/browser': ^9.0.1
+      '@simplewebauthn/server': ^9.0.2
+      nodemailer: ^6.8.0
+    peerDependenciesMeta:
+      '@simplewebauthn/browser':
+        optional: true
+      '@simplewebauthn/server':
+        optional: true
+      nodemailer:
+        optional: true
+
   '@auth/core@0.32.0':
     resolution: {integrity: sha512-3+ssTScBd+1fd0/fscAyQN1tSygXzuhysuVVzB942ggU4mdfiTbv36P0ccVnExKWYJKvu3E2r3/zxXCCAmTOrg==}
     peerDependencies:
@@ -108,22 +122,8 @@ packages:
       nodemailer:
         optional: true
 
-  '@auth/core@0.34.1':
-    resolution: {integrity: sha512-tuYU2VIbI8rFbkSwP710LmybB2FXJsPN7j3sjRVfN9SXVQBK2ej6LdewQaofpBGp4Mk+cC2UeiGNH0or4tgaeA==}
-    peerDependencies:
-      '@simplewebauthn/browser': ^9.0.1
-      '@simplewebauthn/server': ^9.0.2
-      nodemailer: ^6.8.0
-    peerDependenciesMeta:
-      '@simplewebauthn/browser':
-        optional: true
-      '@simplewebauthn/server':
-        optional: true
-      nodemailer:
-        optional: true
-
-  '@auth/prisma-adapter@2.4.1':
-    resolution: {integrity: sha512-VF5IOTHEWHX6WHUxIbsbc12m34cp5T82fzJfi7DmzwBZb89UsoROejV8l0B1dCTZ+pDIS0d4zN9dSa2gIKywNQ==}
+  '@auth/prisma-adapter@1.6.0':
+    resolution: {integrity: sha512-PQU8/Oi5gfjzb0MkhMGVX0Dg877phPzsQdK54+C7ubukCeZPjyvuSAx1vVtWEYVWp2oQvjgG/C6QiDoeC7S10A==}
     peerDependencies:
       '@prisma/client': '>=2.26.0 || >=3 || >=4 || >=5'
 
@@ -390,13 +390,13 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@prisma/adapter-neon@5.16.2':
-    resolution: {integrity: sha512-nK3LzO6KipdjX+OF/zECFMxsHCc0uwt9hqFOxe6by5ZtNkADORIhK72JUGbzA1hGJ5zzKIxu1QTOtgfI+O73lw==}
+  '@prisma/adapter-neon@5.12.1':
+    resolution: {integrity: sha512-AUTochpyoo02QZoUxu4QUgxbB8F2rZM0CcBeLXklORFOYpo2j/yS8cnGHSByWaA61Fjr5Dv38xVJVSiTx35o5g==}
     peerDependencies:
       '@neondatabase/serverless': ^0.6.0 || ^0.7.0 || ^0.8.0 || ^0.9.0
 
-  '@prisma/client@5.12.1':
-    resolution: {integrity: sha512-6/JnizEdlSBxDIdiLbrBdMW5NqDxOmhXAJaNXiPpgzAPr/nLZResT6MMpbOHLo5yAbQ1Vv5UU8PTPRzb0WIxdA==}
+  '@prisma/client@5.16.2':
+    resolution: {integrity: sha512-+1lmkhR9gHWcTC5oghm2ZKpWljyWdzfazCVlLKUWXVmwHSf52g81aZ8qb6Km5Bs025yBi7puLp3qSLEvktoUtw==}
     engines: {node: '>=16.13'}
     peerDependencies:
       prisma: '*'
@@ -404,11 +404,14 @@ packages:
       prisma:
         optional: true
 
+  '@prisma/debug@5.12.1':
+    resolution: {integrity: sha512-kd/wNsR0klrv79o1ITsbWxYyh4QWuBidvxsXSParPsYSu0ircUmNk3q4ojsgNc3/81b0ozg76iastOG43tbf8A==}
+
   '@prisma/debug@5.16.2':
     resolution: {integrity: sha512-ItzB4nR4O8eLzuJiuP3WwUJfoIvewMHqpGCad+64gvThcKEVOtaUza9AEJo2DPqAOa/AWkFyK54oM4WwHeew+A==}
 
-  '@prisma/driver-adapter-utils@5.16.2':
-    resolution: {integrity: sha512-0DhUloFJqBH4jrQZeW+SEwFT1MYUWXiQoGZx0D0pBZdRm1ZPqKQT2InqprC3oKt92LE0Otbh1oQplX7YD5RIhQ==}
+  '@prisma/driver-adapter-utils@5.12.1':
+    resolution: {integrity: sha512-s5EHANHIyWID/3WLNYn3wy1SUGC2OFH2thYriq+sKo4GZxEduX9oraOVlPruZZBt/roN9ojZcph4R2oecWzfXg==}
 
   '@prisma/engines-version@5.16.0-24.34ace0eb2704183d2c05b60b52fba5c43c13f303':
     resolution: {integrity: sha512-HkT2WbfmFZ9WUPyuJHhkiADxazHg8Y4gByrTSVeb3OikP6tjQ7txtSUGu9OBOBH0C13dPKN2qqH12xKtHu/Hiw==}
@@ -2110,6 +2113,16 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
+  '@auth/core@0.29.0':
+    dependencies:
+      '@panva/hkdf': 1.2.0
+      '@types/cookie': 0.6.0
+      cookie: 0.6.0
+      jose: 5.4.1
+      oauth4webapi: 2.11.1
+      preact: 10.11.3
+      preact-render-to-string: 5.2.3(preact@10.11.3)
+
   '@auth/core@0.32.0':
     dependencies:
       '@panva/hkdf': 1.2.0
@@ -2120,20 +2133,10 @@ snapshots:
       preact: 10.11.3
       preact-render-to-string: 5.2.3(preact@10.11.3)
 
-  '@auth/core@0.34.1':
+  '@auth/prisma-adapter@1.6.0(@prisma/client@5.16.2(prisma@5.16.2))':
     dependencies:
-      '@panva/hkdf': 1.2.0
-      '@types/cookie': 0.6.0
-      cookie: 0.6.0
-      jose: 5.4.1
-      oauth4webapi: 2.11.1
-      preact: 10.11.3
-      preact-render-to-string: 5.2.3(preact@10.11.3)
-
-  '@auth/prisma-adapter@2.4.1(@prisma/client@5.12.1(prisma@5.16.2))':
-    dependencies:
-      '@auth/core': 0.34.1
-      '@prisma/client': 5.12.1(prisma@5.16.2)
+      '@auth/core': 0.29.0
+      '@prisma/client': 5.16.2(prisma@5.16.2)
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
       - '@simplewebauthn/server'
@@ -2357,21 +2360,23 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@prisma/adapter-neon@5.16.2(@neondatabase/serverless@0.9.4)':
+  '@prisma/adapter-neon@5.12.1(@neondatabase/serverless@0.9.4)':
     dependencies:
       '@neondatabase/serverless': 0.9.4
-      '@prisma/driver-adapter-utils': 5.16.2
+      '@prisma/driver-adapter-utils': 5.12.1
       postgres-array: 3.0.2
 
-  '@prisma/client@5.12.1(prisma@5.16.2)':
+  '@prisma/client@5.16.2(prisma@5.16.2)':
     optionalDependencies:
       prisma: 5.16.2
 
+  '@prisma/debug@5.12.1': {}
+
   '@prisma/debug@5.16.2': {}
 
-  '@prisma/driver-adapter-utils@5.16.2':
+  '@prisma/driver-adapter-utils@5.12.1':
     dependencies:
-      '@prisma/debug': 5.16.2
+      '@prisma/debug': 5.12.1
 
   '@prisma/engines-version@5.16.0-24.34ace0eb2704183d2c05b60b52fba5c43c13f303': {}
 
