@@ -1,7 +1,6 @@
 import type { User } from '@/app/lib/definitions';
 import { sql } from '@vercel/postgres';
 import NextAuth from 'next-auth';
-import Google from 'next-auth/providers/google';
 import { authConfig } from './auth.config';
 
 async function getUser(email: string): Promise<User | undefined> {
@@ -22,7 +21,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     //     const parsedCredentials = z
     //       .object({ email: z.string().email(), password: z.string().min(6) })
     //       .safeParse(credentials);
-
     //     if (parsedCredentials.success) {
     //       const { email, password } = parsedCredentials.data;
     //       const user = await getUser(email);
@@ -34,6 +32,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     //     return null;
     //   },
     // }),
-    Google,
+    // Google,
   ],
 });
