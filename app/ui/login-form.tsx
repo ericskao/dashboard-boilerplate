@@ -7,6 +7,7 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/20/solid';
 import { AtSymbolIcon, KeyIcon } from '@heroicons/react/24/outline';
+import { signIn, useSession } from 'next-auth/react';
 import { useActionState } from 'react';
 import { Button } from './button';
 
@@ -15,12 +16,26 @@ export default function LoginForm() {
     authenticate,
     undefined
   );
+  const { data: session, status } = useSession();
+  console.log('session login', session);
   return (
-    <form className="space-y-3" action={formAction}>
+    <div className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
         </h1>
+        <div className="w-full">
+          <form
+            action={async () => {
+              await signIn('google');
+            }}
+          >
+            <button className="flex h-[48px] w-full grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+              {/* <ArrowLeftEndOnRectangleIcon className="w-6" /> */}
+              <div className="hidden md:block">Sign In With Google</div>
+            </button>
+          </form>
+        </div>
         <div className="w-full">
           <div>
             <label
@@ -78,6 +93,6 @@ export default function LoginForm() {
           )}
         </div>
       </div>
-    </form>
+    </div>
   );
 }
