@@ -1,39 +1,29 @@
-import type { User } from '@/app/lib/definitions';
-import { sql } from '@vercel/postgres';
-import NextAuth from 'next-auth';
+import NextAuth, { Session } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 import Google from 'next-auth/providers/google';
-import { authConfig } from './auth.config';
 
-async function getUser(email: string): Promise<User | undefined> {
-  try {
-    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`;
-    return user.rows[0];
-  } catch (error) {
-    console.error('Failed to fetch user:', error);
-    throw new Error('Failed to fetch user.');
-  }
-}
-
-export const { handlers, auth, signIn, signOut } = NextAuth({
-  ...authConfig,
+export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    // Credentials({
-    //   async authorize(credentials) {
-    //     const parsedCredentials = z
-    //       .object({ email: z.string().email(), password: z.string().min(6) })
-    //       .safeParse(credentials);
-
-    //     if (parsedCredentials.success) {
-    //       const { email, password } = parsedCredentials.data;
-    //       const user = await getUser(email);
-    //       if (!user) return null;
-    //       const passwordsMatch = await bcrypt.compare(password, user.password);
-    //       if (passwordsMatch) return user;
-    //     }
-    //     console.log('Invalid credentials');
-    //     return null;
-    //   },
-    // }),
-    Google,
+    Google({
+      // profile(profile) {
+      //   console.log('profile in provider', profile);
+      //   return { role: profile.role ?? 'user', ...profile };
+      // },
+    }),
   ],
+  callbacks: {
+    jwt({ token, user }) {
+      if (user) {
+        // User is available during sign-in
+        token.id = user.id;
+      }
+      return token;
+    },
+    async session({ session, token }: { session: Session; token: JWT }) {
+      if (session.user && token.id) {
+        session.user.id = token.id as string;
+      }
+      return session;
+    },
+  },
 });
