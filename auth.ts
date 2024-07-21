@@ -1,18 +1,22 @@
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { PrismaClient } from '@prisma/client';
 import NextAuth, { Session } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import Google from 'next-auth/providers/google';
+import Resend from 'next-auth/providers/resend';
+
+const prisma = new PrismaClient();
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
-    Google({
-      // profile(profile) {
-      //   console.log('profile in provider', profile);
-      //   return { role: profile.role ?? 'user', ...profile };
-      // },
+    Google({}),
+    Resend({
+      from: 'sent@ericskao.com',
     }),
   ],
-  pages: {
-    signIn: '/login',
+  adapter: PrismaAdapter(prisma),
+  experimental: {
+    enableWebAuthn: true,
   },
   callbacks: {
     // authorized({ auth, request: { nextUrl } }) {
