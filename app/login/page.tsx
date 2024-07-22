@@ -1,5 +1,5 @@
 import AcmeLogo from '@/app/ui/acme-logo';
-import LoginForm from '@/app/ui/login-form';
+import { LogIn } from '../ui/log-in';
 
 const Login = () => {
   return (
@@ -10,7 +10,7 @@ const Login = () => {
             <AcmeLogo />
           </div>
         </div>
-        <LoginForm />
+        <LogIn />
       </div>
     </main>
   );
